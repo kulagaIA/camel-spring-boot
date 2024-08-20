@@ -16,9 +16,8 @@
  */
 package org.apache.camel.component.platform.http.springboot;
 
-import org.junit.jupiter.api.Test;
-
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 
@@ -33,7 +32,8 @@ abstract class PlatformHttpBase {
     }
 
     @Test
-    public void testPost() {
+    public void testPost() throws InterruptedException {
+        Thread.sleep(500); //wait until http server is up
         Assertions.assertThat(restTemplate.postForEntity("/mypost", "test", String.class).getBody()).isEqualTo("TEST");
     }
 }
